@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* —— Brand tokens (v4 でも普通のCSS変数でOK) —— */
+:root{
+  --bg: #f7f3ee;         /* 生成り */
+  --ink: #2b211e;        /* 深い茶 */
+  --plum: #42223a;       /* 深紫（サブ） */
+  --burgundy: #6b1f3f;   /* ボルドー（主要アクセント）*/
+  --gold: #b08d57;       /* 落ち着いた金 */
+}
+
+/* —— Base —— */
+html, body, #root { height: 100%; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               "Noto Sans JP", sans-serif;
+}
+
+/* 見出しはセリフ体で気品を */
+h1,h2,h3,h4{
+  font-family: "Noto Serif JP", serif;
+  letter-spacing: .01em;
+}
