@@ -83,7 +83,7 @@ export default function Top() {
               (src, i) => (
                 <div
                   key={i}
-                  className="shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg snap-center"
+                  className="shrink-0 w-72 h-auto rounded-2xl overflow-hidden shadow-lg snap-center"
                 >
                   <img src={src} alt={`スライド${i + 1}`} className="w-full h-full object-cover" />
                 </div>

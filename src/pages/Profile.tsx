@@ -11,8 +11,16 @@ export default function Profile() {
     { label: "メール", value: "fukumoto.ai.kashiwa@gmail.com" },
   ];
 
+  const career = [
+    { year: "1974", text: "柏市に生まれる" },
+    { year: "1997", text: "大学卒業後、民間企業に勤務" },
+    { year: "2017", text: "地域活動を経て柏市議会議員に初当選" },
+    { year: "2021", text: "2期目当選、子育て・教育、防災を中心に活動" },
+  ];
+
   return (
     <section className="space-y-8">
+      {/* プロフィールヘッダー */}
       <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-white">
         <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--gold)]/10 via-white to-[color:var(--gold)]/10" />
         <div className="relative p-6 md:p-8 flex flex-col md:flex-row gap-6 md:items-center">
@@ -32,6 +40,7 @@ export default function Profile() {
         </div>
       </div>
 
+      {/* 基本情報 */}
       <div className="rounded-3xl border border-black/10 bg-white p-6">
         <h3 className="text-lg font-bold text-[var(--plum)]">基本情報</h3>
         <dl className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
@@ -45,6 +54,21 @@ export default function Profile() {
           ))}
         </dl>
       </div>
+
+      {/* 略歴 */}
+      <div className="rounded-3xl border border-black/10 bg-white p-6">
+        <h3 className="text-lg font-bold text-[var(--plum)]">略歴</h3>
+        <ol className="relative mt-6 border-l border-[color:var(--gold)]/50 space-y-6">
+          {career.map((c, i) => (
+            <li key={i} className="ml-4">
+              <div className="absolute -left-2 mt-1.5 h-3 w-3 rounded-full bg-[#ff1493]" />
+              <time className="block text-sm font-semibold text-zinc-500">{c.year}</time>
+              <p className="mt-1 text-zinc-700">{c.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }
+
