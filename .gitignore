@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# browser-saved junk
+public/photos/aisatsu-01_files/
+*.ダウンロード
+NUL
