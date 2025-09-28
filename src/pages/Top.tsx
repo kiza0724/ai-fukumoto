@@ -1,10 +1,17 @@
 // src/pages/Top.tsx
 import { Link } from "react-router-dom";
+import { columns, formatDate } from "../data/columns";
+import Sns from "./Sns";
 
 export default function Top() {
+  // 最新3件だけ取り出し
+  const latest = [...columns]
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
+    .slice(0, 3);
+
   return (
     <>
-      {/* Hero：深紫→ボルドーの上品グラデに薄金の縁取り */}
+      {/* Hero */}
       <section className="relative overflow-hidden rounded-3xl border border-black/10">
         <div className="absolute inset-0 bg-gradient-to-tr from-[var(--burgundy)] via-[#ff1493] to-[var(--burgundy)]" />
         <div className="relative p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
@@ -16,36 +23,11 @@ export default function Top() {
               現場主義で、子育て・教育・防災・地域経済をしっかり前へ。柏市議会で積み重ねてきた経験を、市民のために。
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                to="/aisatsu"
-                className="inline-flex items-center justify-center rounded-xl border border-white/50 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)]/20 hover:border-[color:var(--gold)]/60"
-              >
-                あいさつ
-              </Link>
-              <Link
-                to="/policy"
-                className="inline-flex items-center justify-center rounded-xl border border-white/50 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)]/20 hover:border-[color:var(--gold)]/60"
-              >
-                政策
-              </Link>
-              <Link
-                to="/achievements"
-                className="inline-flex items-center justify-center rounded-xl border border-white/50 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)]/20 hover:border-[color:var(--gold)]/60"
-              >
-                実績
-              </Link>
-              <Link
-                to="/profile"
-                className="inline-flex items-center justify-center rounded-xl border border-white/50 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)]/20 hover:border-[color:var(--gold)]/60"
-              >
-                プロフィール
-              </Link>
-              <Link
-                to="/sns"
-                className="inline-flex items-center justify-center rounded-xl border border-white/50 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)]/20 hover:border-[color:var(--gold)]/60"
-              >
-                SNS
-              </Link>
+              <Link to="/aisatsu" className="btn-white">あいさつ</Link>
+              <Link to="/policy" className="btn-white">政策</Link>
+              <Link to="/achievements" className="btn-white">実績</Link>
+              <Link to="/profile" className="btn-white">プロフィール</Link>
+              <Link to="/sns" className="btn-white">SNS</Link>
             </div>
           </div>
 
@@ -55,12 +37,44 @@ export default function Top() {
         </div>
       </section>
 
-      {/* 下に余白を少し */}
-      <div className="h-6" />
+      {/* ↓ここに新着コラムとSNSを追加 */}
+      <section className="mt-12 space-y-10">
+        {/* 新着コラム */}
+        <div>
+          <h2 className="text-2xl md:text-3xl font-black text-[#ff1493] mb-6">
+            新着コラム
+          </h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {latest.map(c => (
+              <article
+                key={c.id}
+                className="rounded-2xl border border-[color:var(--gold)]/30 bg-white/90 p-6 shadow-sm hover:shadow transition"
+              >
+                <div className="text-sm text-zinc-500">{formatDate(c.date)}</div>
+                <h3 className="mt-1 font-bold text-[var(--burgundy)]">{c.title}</h3>
+                <Link
+                  to={`/columns/${c.id}`}
+                  className="mt-3 inline-flex items-center gap-1 font-semibold text-[#ff1493] hover:text-black"
+                >
+                  続きを読む →
+                </Link>
+              </article>
+            ))}
+          </div>
+          <div className="mt-4 text-right">
+            <Link to="/columns" className="text-sm font-semibold text-[#ff1493] hover:text-black">
+              コラム一覧へ →
+            </Link>
+          </div>
+        </div>
 
-      {/* 画像スライドセクション（snap-centerで中央に止まる） */}
-      <section className="relative mt-2">
-        <h2 className="text-xl md:text-2xl font-bold text-[var(--burgundy)] mb-4">
+        {/* SNSリンク */}
+        <Sns />
+      </section>
+
+      {/* 画像スライド */}
+      <section className="relative mt-12">
+        <h2 className="text-xl md:text-2xl font-bold text-[#ff1493] mb-4">
           フォトスライド
         </h2>
         <div className="overflow-x-auto">
